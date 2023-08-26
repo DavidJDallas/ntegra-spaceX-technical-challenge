@@ -1,28 +1,21 @@
 import React from 'react';
-import { getLaunchData} from './ApiCalls';
-import './App.css';
-import {useState, useEffect} from 'react';
+import './styling/App.css';
+import MainTable from './table/MainTable'
+import Header from './Header'
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
-function App() {
+const App = () => {
 
-  const [name, setName] = useState('');
-  const [launchData, setLaunchData] = useState('');
-  const [rocketID, setRocketID] = useState('');
-  const [details, setDetails] = useState('');
-
-  const getData = async () => {
-    const response = await getLaunchData()
-    
-  }
-
-  useEffect(() => {
-     getData()
-  }, [])
- 
- 
   return (
     <div className="App">
-    
+      <Header/>
+       <CssBaseline />
+      <Container maxWidth ="lg">
+       
+        <MainTable/>
+      </Container>
     </div>
   );
 }
