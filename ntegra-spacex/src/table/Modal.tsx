@@ -13,10 +13,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
   width: '80%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
@@ -47,12 +47,12 @@ const ModalComponent = ({openModal, handleClose, specificLaunchData}: ModalProps
           </TableRow>
           <TableRow>
                   
-                  <TableCell className='column-row' align="right">{specificLaunchData.launchDate}</TableCell>
-                  <TableCell className='column-row' align="right">{specificLaunchData.launchDate}</TableCell>
-                  <TableCell className='column-row' align="center">{specificLaunchData.launchpadID}</TableCell>
-                  <TableCell className='column-row' align="center">{specificLaunchData.success}</TableCell>
-                  <TableCell className='column-row' align="center">{specificLaunchData.details}</TableCell>
-                </TableRow>
+                <TableCell className='column-row' align="right">{specificLaunchData.launchDate}</TableCell>
+                <TableCell className='column-row' align="right">{specificLaunchData.launchDate}</TableCell>
+                <TableCell className='column-row' align="center">{specificLaunchData.launchpadID}</TableCell>
+                <TableCell className='column-row' align="center">{specificLaunchData.success}</TableCell>
+                <TableCell className='column-row' align="center">{specificLaunchData.details}</TableCell>
+            </TableRow>
         </Box>
       </Modal>
     </div>

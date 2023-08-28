@@ -20,19 +20,12 @@ const MainTable = () => {
     launchpadID: '',
     details: '',
     launchDate: '',
-    rocketID: '',
-    // Initialize other properties as needed
+    rocketID: '',  
   };
+
   const [responseData, setResponseData] = useState<FilteredLaunchData[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [name, setName] = useState<string>('');
-  const [launchDate, setLaunchDate] = useState<string>('');
-  const [rocketID, setRocketID] = useState<string>('');
-  const [launchpadID, setLaunchpadID]= useState<string>('');
-  const [success, setSuccess] = useState<boolean>(false);
-  const [details, setDetails] = useState<string>('');
-
-  const [specificLaunchData, setSpecificLaunchData] = useState<FilteredLaunchData>(initialLaunchData)
+  const [specificLaunchData, setSpecificLaunchData] = useState<FilteredLaunchData>(initialLaunchData);
 
  
   
@@ -43,11 +36,8 @@ const MainTable = () => {
   const getDataFromAPICall = async (): Promise<void> => {
     try{
       const responseData: FilteredLaunchData[] = await getLaunchData();
-        if(responseData.length>0){
-          console.log(responseData)
-          setResponseData(responseData);   
-          const trial = responseData.filter((element) => element.rocketID=== "5e9d0d95eda69973a809d1ec")        
-          console.log(trial)
+        if(responseData.length>0){         
+          setResponseData(responseData);          
         }  
     }catch(error: any){
         throw new Error(error)
@@ -67,9 +57,8 @@ const MainTable = () => {
   }
 
   const handleSelectData = (row: FilteredLaunchData):void => {
-    setSpecificLaunchData(row)
-
-    handleOpenModal()
+    setSpecificLaunchData(row);
+    handleOpenModal();
   }
 
     return(<>

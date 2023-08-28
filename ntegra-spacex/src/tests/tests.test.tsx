@@ -7,6 +7,7 @@ import Header from '../Header'
 import App from '../App'
 import * as APICallsModule from '../ApiCalls'
 import { FilteredLaunchData } from '../types/APICallTypes';
+import * as React from 'react';
 
 
 
@@ -120,8 +121,8 @@ describe("Main Table component", () => {
 
   })
   
-  it("Correctly calls and handles the data from the API call", async() => {
+  // it("Correctly calls and handles the data from the API call", async() => {
 
   
-  })  
+  // })  
 })
