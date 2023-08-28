@@ -12,7 +12,7 @@ import '../styling/Table.css'
 import { FilteredLaunchData } from '../types/APICallTypes';
 import Modal from './Modal';
 
-const MainTable: React.FC = () => {
+const MainTable = () => {
 
   const [responseData, setResponseData] = useState<FilteredLaunchData[]>([])
   
@@ -24,6 +24,7 @@ const MainTable: React.FC = () => {
     try{
       const responseData: FilteredLaunchData[] = await getLaunchData();
         if(responseData.length>0){
+          console.log(responseData)
           setResponseData(responseData);   
           const trial = responseData.filter((element) => element.rocketID=== "5e9d0d95eda69973a809d1ec")        
           console.log(trial)
@@ -51,8 +52,7 @@ const MainTable: React.FC = () => {
         </TableHead>
         <TableBody>
           {responseData.map((row) => (
-            <TableRow
-              
+            <TableRow              
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
