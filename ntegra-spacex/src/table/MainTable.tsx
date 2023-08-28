@@ -10,59 +10,31 @@ import { getLaunchData } from '../ApiCalls';
 import {useState, useEffect} from 'react';
 import '../styling/Table.css'
 import { FilteredLaunchData } from '../types/APICallTypes';
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
+import Modal from './Modal';
 
 const MainTable: React.FC = () => {
 
-  const [name, setName] = useState<string[]>([]);
-  const [launchDate, setLaunchDate] = useState<string[]>([]);
-  const [rocketID, setRocketID] = useState<string[]>([]);
-  const [details, setDetails] = useState<string[]>([]);
-  const [launchPadID, setLaunchPadID] = useState<string[]>([]);
-  const [success, setSuccess] = useState<boolean[]>([]); 
   const [responseData, setResponseData] = useState<FilteredLaunchData[]>([])
-
-  const getDataFromAPICall = async () => {
-
-    try{
-      const responseData: FilteredLaunchData[] | Error = await getLaunchData();
-        console.log(responseData);
-        if(responseData.length>0){
-          setResponseData(responseData)
-          let arrayOfNames = responseData.map((element: FilteredLaunchData) => (element.name))
-        console.log(arrayOfNames)      
-          setName(arrayOfNames)
-      }
   
-    }catch(error){
-      
-    }
+  //If time, add local storage boolean to indicate whether API has been called. 
 
-   
+  //the apiCallMade state is implemented to stop the spaceX API being called frequently. For the purposes of this app, the data just needs to be accessed once, stored in state, and that is it. The data from the spaceX api is not being updated frequently enough that it would require constant calls from this app, and making constant calls will impact performance of the app. Although basically neglible at this sclae, it would become noticeable if the app was scaled upwards. The API call is therefore made once, when the app is initially loaded and refreshed.
 
-    
+  const getDataFromAPICall = async (): Promise<void> => {
+    try{
+      const responseData: FilteredLaunchData[] = await getLaunchData();
+        if(responseData.length>0){
+          setResponseData(responseData);   
+          const trial = responseData.filter((element) => element.rocketID=== "5e9d0d95eda69973a809d1ec")        
+          console.log(trial)
+        }  
+    }catch(error: any){
+        throw new Error(error)
+    }    
   }
 
-  useEffect(() => {
-     getDataFromAPICall()
+  useEffect((): void => {
+    getDataFromAPICall()
   }, [])
 
     return(<>
@@ -74,12 +46,13 @@ const MainTable: React.FC = () => {
             <TableCell className='column-title'>Name</TableCell>           
             <TableCell className='column-title' align="right">Launch Date</TableCell>
             <TableCell className='column-title' align="right">Rocket ID</TableCell>
-            <TableCell className='column-title' align="right">Details</TableCell>
+            <TableCell className='column-title' align="center">Details</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {responseData.map((row) => (
             <TableRow
+              
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
@@ -88,7 +61,7 @@ const MainTable: React.FC = () => {
               </TableCell>
               <TableCell align="right">{row.launchDate}</TableCell>
               <TableCell align="right">{row.rocketID}</TableCell>
-              <TableCell align="right">{row.details}</TableCell>              
+              <TableCell align="left">{row.details}</TableCell>              
             </TableRow>
           ))}
         </TableBody>
