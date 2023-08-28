@@ -10,11 +10,26 @@ import { getLaunchData } from '../ApiCalls';
 import {useState, useEffect} from 'react';
 import '../styling/Table.css'
 import { FilteredLaunchData } from '../types/APICallTypes';
-import Modal from './Modal';
+import ModalComponent from './Modal';
 
 const MainTable = () => {
 
-  const [responseData, setResponseData] = useState<FilteredLaunchData[]>([])
+  const [responseData, setResponseData] = useState<FilteredLaunchData[]>([]);
+  const [openModal, setOpenModal] = useState<boolean>(true);
+  const [name, setName] = useState<string>('');
+  const [launchDate, setLaunchDate] = useState<string>('');
+  const [rocketID, setRocketID] = useState<string>('');
+  const [launchpadID, setLaunchpadID]= useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
+  const [details, setDetails] = useState<string>('');
+
+  const handleOpenModal = () :void => {
+    setOpenModal(true);
+  }
+
+  const handleCloseModal = () :void => {
+    setOpenModal(false);
+  }
   
   //If time, add local storage boolean to indicate whether API has been called. 
 
@@ -44,7 +59,7 @@ const MainTable = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className='column-title'>Name</TableCell>           
+            <TableCell className='column-title' >Name</TableCell>           
             <TableCell className='column-title' align="right">Launch Date</TableCell>
             <TableCell className='column-title' align="right">Rocket ID</TableCell>
             <TableCell className='column-title' align="center">Details</TableCell>
@@ -54,6 +69,7 @@ const MainTable = () => {
           {responseData.map((row) => (
             <TableRow              
               key={row.name}
+            
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -67,6 +83,17 @@ const MainTable = () => {
         </TableBody>
       </Table>
     </TableContainer>
+
+            <ModalComponent
+            openModal={openModal}
+            handleClose={handleCloseModal}
+            name = {name}
+            launchDate={launchDate}
+            rocketID = {rocketID}
+            launchpadID = {launchpadID}
+            success = {success}
+            details = {details}
+            />
     </>)
 }
 
