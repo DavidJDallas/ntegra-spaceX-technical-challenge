@@ -14,8 +14,17 @@ import ModalComponent from './Modal';
 
 const MainTable = () => {
 
+  const initialLaunchData: FilteredLaunchData = {
+    name: '',
+    success: false,
+    launchpadID: '',
+    details: '',
+    launchDate: '',
+    rocketID: '',
+    // Initialize other properties as needed
+  };
   const [responseData, setResponseData] = useState<FilteredLaunchData[]>([]);
-  const [openModal, setOpenModal] = useState<boolean>(true);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
   const [launchDate, setLaunchDate] = useState<string>('');
   const [rocketID, setRocketID] = useState<string>('');
@@ -23,13 +32,9 @@ const MainTable = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [details, setDetails] = useState<string>('');
 
-  const handleOpenModal = () :void => {
-    setOpenModal(true);
-  }
+  const [specificLaunchData, setSpecificLaunchData] = useState<FilteredLaunchData>(initialLaunchData)
 
-  const handleCloseModal = () :void => {
-    setOpenModal(false);
-  }
+ 
   
   //If time, add local storage boolean to indicate whether API has been called. 
 
@@ -53,6 +58,20 @@ const MainTable = () => {
     getDataFromAPICall()
   }, [])
 
+  const handleOpenModal = () :void => {
+    setOpenModal(true);
+  }
+
+  const handleCloseModal = () :void => {
+    setOpenModal(false);
+  }
+
+  const handleSelectData = (row: FilteredLaunchData):void => {
+    setSpecificLaunchData(row)
+
+    handleOpenModal()
+  }
+
     return(<>
     <h1>Launch Data</h1>
     <TableContainer component={Paper}>
@@ -69,30 +88,35 @@ const MainTable = () => {
           {responseData.map((row) => (
             <TableRow              
               key={row.name}
-            
+              
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
+              <TableCell 
+                onClick = {() => handleSelectData(row)}
+                component="th" scope="row">
+                  {row.name}
               </TableCell>
-              <TableCell align="right">{row.launchDate}</TableCell>
-              <TableCell align="right">{row.rocketID}</TableCell>
+              <TableCell 
+                onClick = {() => handleSelectData(row)}
+                align="right">
+                  {row.launchDate}
+              </TableCell>
+              <TableCell 
+                onClick = {() => handleSelectData(row)}
+                align="right">
+                  {row.rocketID}
+              </TableCell>
+              
               <TableCell align="left">{row.details}</TableCell>              
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-
             <ModalComponent
-            openModal={openModal}
-            handleClose={handleCloseModal}
-            name = {name}
-            launchDate={launchDate}
-            rocketID = {rocketID}
-            launchpadID = {launchpadID}
-            success = {success}
-            details = {details}
+              openModal={openModal}
+              handleClose={handleCloseModal}          
+              specificLaunchData = {specificLaunchData}
             />
     </>)
 }
