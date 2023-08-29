@@ -11,6 +11,8 @@ import {useState, useEffect} from 'react';
 import '../styling/Table.css'
 import { FilteredLaunchData } from '../types/APICallTypes';
 import ModalComponent from './Modal';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const MainTable = () => {
 
@@ -26,6 +28,7 @@ const MainTable = () => {
   const [responseData, setResponseData] = useState<FilteredLaunchData[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [specificLaunchData, setSpecificLaunchData] = useState<FilteredLaunchData>(initialLaunchData);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
  
   
@@ -35,9 +38,11 @@ const MainTable = () => {
 
   const getDataFromAPICall = async (): Promise<void> => {
     try{
+      setIsLoading(true);
       const responseData: FilteredLaunchData[] = await getLaunchData();
         if(responseData.length>0){         
-          setResponseData(responseData);          
+          setResponseData(responseData);
+          setIsLoading(false)          
         }  
     }catch(error: any){
         throw new Error(error)
@@ -61,7 +66,21 @@ const MainTable = () => {
     handleOpenModal();
   }
 
-    return(<>
+  if(isLoading){
+    return(
+      <>    
+      <h1>Launch Data</h1>
+        <div className='spinner'>
+          <Box >
+            <CircularProgress />
+            <p>Loading content...</p>
+          </Box>   
+        </div>        
+      </>
+    )
+  }
+
+  return(<>
     <h1>Launch Data</h1>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -82,21 +101,27 @@ const MainTable = () => {
             >
               <TableCell 
                 onClick = {() => handleSelectData(row)}
+                className='table-cell'
                 component="th" scope="row">
                   {row.name}
               </TableCell>
               <TableCell 
+                className='table-cell'
                 onClick = {() => handleSelectData(row)}
                 align="right">
                   {row.launchDate}
               </TableCell>
               <TableCell 
+                className='table-cell'
                 onClick = {() => handleSelectData(row)}
                 align="right">
                   {row.rocketID}
               </TableCell>
               
-              <TableCell align="left">{row.details}</TableCell>              
+              <TableCell 
+              className='table-cell'
+              onClick = {() => handleSelectData(row)}
+              align="left">{row.details}</TableCell>              
             </TableRow>
           ))}
         </TableBody>

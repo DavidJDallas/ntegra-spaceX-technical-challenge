@@ -114,11 +114,6 @@ describe("Main Table component", () => {
     expect(columnRocketID).toBeInTheDocument();
 
     expect(cellName).toBeInTheDocument();
-    
-
-
-
-
   })
   
   // it("Correctly calls and handles the data from the API call", async() => {

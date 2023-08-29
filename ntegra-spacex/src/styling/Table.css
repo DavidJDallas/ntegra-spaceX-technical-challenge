@@ -2,3 +2,15 @@
     background-color:#22272b;
     color: white !important;
 }
+
+.spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.table-cell{
+    cursor: pointer;
+}
+
