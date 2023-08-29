@@ -10,11 +10,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody';
 import '../../styling/Modal.css'
 import { TableContainer } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
-const ModalComponent = ({openModal, handleClose, specificLaunchData}: ModalProps) => {
+const ModalComponent = ({openModal, handleClose, specificLaunchData}: ModalProps): JSX.Element => {
   
   const style = {
     position: 'absolute',
@@ -47,26 +49,28 @@ const ModalComponent = ({openModal, handleClose, specificLaunchData}: ModalProps
           <CloseIcon />
         </IconButton>
           <Typography align="center" className='modal-title'variant="h4" component="h2">
-            Data for {specificLaunchData.name}
+          Data for {specificLaunchData.name}
           </Typography>
-          <TableContainer>
-            <Table>          
+          
+            <Table>
+              <TableBody>          
               <TableRow>                  
-                  <TableCell className='column-title' align="center">Launch Date</TableCell>
-                  <TableCell className='column-title' align="center">Rocket ID</TableCell>
-                  <TableCell className='column-title' align="center">Launchpad ID</TableCell>
-                  <TableCell className='column-title' align="center">Success</TableCell>
-                  <TableCell className='column-title' align="center">Details</TableCell>
+                  <TableCell className='modal-cell-title' align="center">Launch Date</TableCell>
+                  <TableCell className='modal-cell-title' align="center">Rocket ID</TableCell>
+                  <TableCell className='modal-cell-title' align="center">Launchpad ID</TableCell>
+                  <TableCell className='modal-cell-title' align="center">Success</TableCell>
+                  <TableCell className='modal-cell-title' align="center">Details</TableCell>
               </TableRow>
               <TableRow>                  
-                  <TableCell className='column-row' align="center">{specificLaunchData.launchDate}</TableCell>
-                  <TableCell className='column-row' align="center">{specificLaunchData.launchDate}</TableCell>
-                  <TableCell className='column-row' align="center">{specificLaunchData.launchpadID}</TableCell>
-                  <TableCell className='column-row' align="center">{specificLaunchData.success.toString()}</TableCell>
-                  <TableCell className='column-row' align="center">{specificLaunchData.details}</TableCell>
-                </TableRow>  
+                  <TableCell align="center">{specificLaunchData.launchDate}</TableCell>
+                  <TableCell align="center">{specificLaunchData.launchDate}</TableCell>
+                  <TableCell align="center">{specificLaunchData.launchpadID}</TableCell>
+                  <TableCell align="center">{specificLaunchData.success.toString()}</TableCell>
+                  <TableCell align="center">{specificLaunchData.details}</TableCell>
+              </TableRow>  
+              </TableBody>
             </Table>
-        </TableContainer>
+        
         </Box>
       </Modal>
     </div>

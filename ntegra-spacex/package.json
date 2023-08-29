@@ -22,6 +22,7 @@
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "ts-jest": "^29.1.1",
     "typescript": "^4.9.5",
@@ -65,11 +66,13 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/react-app-env.d.ts"
     ],
-   
-      "transform": {
-        "<transform_regex>": ["ts-jest", { "isolatedModules": true}]
+    "transform": {
+      "<transform_regex>": [
+        "ts-jest",
+        {
+          "isolatedModules": true
+        }
+      ]
     }
-    
-   
   }
 }

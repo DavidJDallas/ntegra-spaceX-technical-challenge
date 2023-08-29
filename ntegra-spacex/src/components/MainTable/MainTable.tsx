@@ -13,8 +13,9 @@ import { FilteredLaunchData } from '../../services/APICalls/APICallTypes';
 import ModalComponent from './Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 
-const MainTable = () => {
+const MainTable: React.FC = (): JSX.Element => {
 
   const initialLaunchData: FilteredLaunchData = {
     name: '',
@@ -43,8 +44,7 @@ const MainTable = () => {
           setIsLoading(false)          
         }  
     }catch(error: any){
-
-          throw new Error(error)
+        throw new Error(error)
     }    
   }
 
@@ -94,17 +94,19 @@ const MainTable = () => {
         <TableBody>
           {responseData.map((row) => (
             <TableRow              
-              key={row.name}
-              
+              key={row.name}              
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell 
+               
                 onClick = {() => handleSelectData(row)}
                 className='table-cell'
                 component="th" scope="row">
+                 
                   {row.name}
               </TableCell>
               <TableCell 
+
                 className='table-cell'
                 onClick = {() => handleSelectData(row)}
                 align="right">
