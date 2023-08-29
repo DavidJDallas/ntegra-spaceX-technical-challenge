@@ -6,10 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { getLaunchData } from '../ApiCalls';
+import { getLaunchData } from '../../services/APICalls/ApiCalls';
 import {useState, useEffect} from 'react';
-import '../styling/Table.css'
-import { FilteredLaunchData } from '../types/APICallTypes';
+import '../../styling/Table.css'
+import { FilteredLaunchData } from '../../services/APICalls/APICallTypes';
 import ModalComponent from './Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -29,8 +29,6 @@ const MainTable = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [specificLaunchData, setSpecificLaunchData] = useState<FilteredLaunchData>(initialLaunchData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
- 
   
   //If time, add local storage boolean to indicate whether API has been called. 
 
@@ -45,7 +43,8 @@ const MainTable = () => {
           setIsLoading(false)          
         }  
     }catch(error: any){
-        throw new Error(error)
+
+          throw new Error(error)
     }    
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './styling/App.css';
-import MainTable from './table/MainTable'
-import Header from './Header'
+import MainTable from './components/MainTable/MainTable'
+import Header from './components/Header/Header'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';

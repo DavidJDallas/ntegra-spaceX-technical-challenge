@@ -3,14 +3,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import {ModalProps} from '../types/TableTypes';
+import {ModalProps} from './TableTypes';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table'
-import '../styling/Modal.css'
+import '../../styling/Modal.css'
 import { TableContainer } from '@mui/material';
 
 

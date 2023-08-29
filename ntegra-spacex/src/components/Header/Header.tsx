@@ -1,4 +1,4 @@
-import './styling/Header.css';
+import '../../styling/Header.css';
 import * as React from 'react';
 
 

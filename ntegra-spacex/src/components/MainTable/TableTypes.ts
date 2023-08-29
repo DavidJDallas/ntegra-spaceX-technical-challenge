@@ -1,4 +1,4 @@
-import { FilteredLaunchData } from "./APICallTypes";
+import { FilteredLaunchData } from "../../services/APICalls/APICallTypes";
 
 export interface ModalProps{
     openModal: boolean,

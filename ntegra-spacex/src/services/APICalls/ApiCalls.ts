@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FilteredLaunchData, LaunchData, LaunchesAPICall} from './types/APICallTypes';
+import {FilteredLaunchData, LaunchData, LaunchesAPICall} from './APICallTypes';
 
 export const getLaunchData = async (): Promise<FilteredLaunchData[]> => {
     try{
