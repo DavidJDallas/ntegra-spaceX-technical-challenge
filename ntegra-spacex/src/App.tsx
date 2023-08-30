@@ -9,8 +9,6 @@ import LaunchDetails from './components/LaunchDetails/LaunchDetails'
 
 const App: React.FC = (): JSX.Element => {
 
-
-
   return (
     <div className="App">
       <Header/>

@@ -1,9 +1,6 @@
 import * as React from 'react';
 import TableCell from '@mui/material/TableCell';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -13,8 +10,7 @@ import {useState, useEffect} from 'react';
 import '../../styling/LaunchDetails.css';
 import Button from '@mui/material/Button';
 
-const LaunchDetails: React.FC = (): JSX.Element => {
-    
+const LaunchDetails: React.FC = (): JSX.Element => {    
 
     const initialLaunchData: FilteredLaunchData = {
         name: '',
@@ -26,7 +22,7 @@ const LaunchDetails: React.FC = (): JSX.Element => {
       };
     
 
-    const {launchName} = useParams();
+    const {launchName} = useParams<string>();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [launchData, setLaunchData] = useState<FilteredLaunchData>(initialLaunchData)
@@ -62,28 +58,28 @@ const LaunchDetails: React.FC = (): JSX.Element => {
     <div className='launch-details-main'>
     
    
-    <h1>{launchData.name}</h1>
-    <Button className='button' variant="contained" onClick={handleBackClick}>
-    Go Back
-    </Button>
-    <Table>
-              <TableBody>          
-              <TableRow>                  
-                  <TableCell className='modal-cell-title' align="center">Launch Date</TableCell>
-                  <TableCell className='modal-cell-title' align="center">Rocket ID</TableCell>
-                  <TableCell className='modal-cell-title' align="center">Launchpad ID</TableCell>
-                  <TableCell className='modal-cell-title' align="center">Success</TableCell>
-                  <TableCell className='modal-cell-title' align="center">Details</TableCell>
-              </TableRow>
-              <TableRow>                  
-                  <TableCell align="center">{launchData.launchDate}</TableCell>
-                  <TableCell align="center">{launchData.launchDate}</TableCell>
-                  <TableCell align="center">{launchData.launchpadID}</TableCell>
-                  <TableCell align="center">{launchData.success.toString()}</TableCell>
-                  <TableCell align="center">{launchData.details}</TableCell>
-              </TableRow>  
-              </TableBody>
-            </Table>
+      <h1>{launchData.name}</h1>
+      <Button className='button' variant="contained" onClick={handleBackClick}>
+        Go Back
+      </Button>
+      <Table>
+       <TableBody>          
+         <TableRow>                  
+           <TableCell className='modal-cell-title' align="center">Launch Date</TableCell>
+           <TableCell className='modal-cell-title' align="center">Rocket ID</TableCell>
+           <TableCell className='modal-cell-title' align="center">Launchpad ID</TableCell>
+           <TableCell className='modal-cell-title' align="center">Success</TableCell>
+           <TableCell className='modal-cell-title' align="center">Details</TableCell>
+         </TableRow>
+         <TableRow>                  
+           <TableCell align="center">{launchData.launchDate}</TableCell>
+           <TableCell align="center">{launchData.launchDate}</TableCell>
+           <TableCell align="center">{launchData.launchpadID}</TableCell>
+           <TableCell align="center">{launchData.success.toString()}</TableCell>
+           <TableCell align="center">{launchData.details}</TableCell>
+         </TableRow>  
+        </TableBody>
+      </Table>
     </div>
     </>)
 }

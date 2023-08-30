@@ -13,7 +13,7 @@ import { FilteredLaunchData } from '../../services/APICalls/APICallTypes';
 import ModalComponent from './Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
+import TablePagination from '@mui/material/TablePagination';
 
 const MainTable: React.FC = (): JSX.Element => {
 
@@ -30,6 +30,9 @@ const MainTable: React.FC = (): JSX.Element => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [specificLaunchData, setSpecificLaunchData] = useState<FilteredLaunchData>(initialLaunchData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
   
   //If time, add local storage boolean to indicate whether API has been called. 
 
@@ -92,13 +95,14 @@ const MainTable: React.FC = (): JSX.Element => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {responseData.map((row) => (
+          {responseData
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row) => (
             <TableRow              
               key={row.name}              
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell 
-               
+              <TableCell                
                 onClick = {() => handleSelectData(row)}
                 className='table-cell'
                 component="th" scope="row">
@@ -106,7 +110,6 @@ const MainTable: React.FC = (): JSX.Element => {
                   {row.name}
               </TableCell>
               <TableCell 
-
                 className='table-cell'
                 onClick = {() => handleSelectData(row)}
                 align="right">
@@ -117,8 +120,7 @@ const MainTable: React.FC = (): JSX.Element => {
                 onClick = {() => handleSelectData(row)}
                 align="right">
                   {row.rocketID}
-              </TableCell>
-              
+              </TableCell>              
               <TableCell 
               className='table-cell'
               onClick = {() => handleSelectData(row)}
@@ -128,11 +130,23 @@ const MainTable: React.FC = (): JSX.Element => {
         </TableBody>
       </Table>
     </TableContainer>
-            <ModalComponent
-              openModal={openModal}
-              handleClose={handleCloseModal}          
-              specificLaunchData = {specificLaunchData}
-            />
+    <TablePagination
+      rowsPerPageOptions={[5]} 
+      component="div"
+      count={responseData.length}
+      page={page}
+      onPageChange={(event, newPage) => setPage(newPage)}
+      rowsPerPage={rowsPerPage}
+      onRowsPerPageChange={(event) => {
+        setRowsPerPage(parseInt(event.target.value, 5));
+        setPage(0);
+      }}
+    />
+    <ModalComponent
+         openModal={openModal}
+         handleClose={handleCloseModal}          
+         specificLaunchData = {specificLaunchData}
+      />
     </>)
 }
 

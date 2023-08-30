@@ -1,4 +1,4 @@
-import {render, waitFor, screen, act, fireEvent} from '@testing-library/react';
+import {render, screen, act, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom'
 import {getLaunchData} from '../../services/APICalls/ApiCalls';
 import MainTable from '../../components/MainTable/MainTable';
@@ -10,11 +10,11 @@ import * as React from 'react';
 
 describe("Main Table component", () => {
 
-    it("Renders the table correctly", async () => {
+  it("Renders the table correctly", async () => {
   
-      jest.mock('../../services/APICalls/ApiCalls');
-  
-      const mockData = [
+    jest.mock('../../services/APICalls/ApiCalls');
+
+    const mockData = [
         {
           name: "falconSat",
           success: false,
@@ -51,20 +51,7 @@ describe("Main Table component", () => {
       expect(cellColumnLaunchDate).toBeInTheDocument();
       expect(cellColumnDetails).toBeInTheDocument();
       expect(cellColumnRocketID).toBeInTheDocument();
-    }),
-    it("Throws an error if there is something wrong with the data", async () => {
-      
-      // jest.mock('../ApiCalls');
-  
-      // const mockData: Error = new Error('API error')
-      
-      // jest.spyOn(APICallsModule, 'getLaunchData').mockResolvedValue(mockData);
-  
-      // await act(async () => {
-      //   render(<MainTable/>);
-    //  })
-  
-    })
+    }),   
     
     it("Loads the modal and passed through the correct information to the modal when the user clicks on the name column cell", async() => {
   

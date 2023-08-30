@@ -1,9 +1,8 @@
-import {render, waitFor, screen, act, fireEvent} from '@testing-library/react';
+import {render, screen, act, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom'
 import {getLaunchData} from '../../services/APICalls/ApiCalls';
 import LaunchDetails from './LaunchDetails';
 import * as APICallsModule from '../../services/APICalls/ApiCalls'
-import { FilteredLaunchData } from '../../services/APICalls/APICallTypes';
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
