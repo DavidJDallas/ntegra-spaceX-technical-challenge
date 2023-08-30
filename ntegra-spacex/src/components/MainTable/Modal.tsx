@@ -1,17 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import {Box, Typography, Modal, TableCell, IconButton, TableRow, Table, TableBody} from '@mui/material';
 import {ModalProps} from './TableTypes';
-import TableCell from '@mui/material/TableCell';
-import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import TableRow from '@mui/material/TableRow';
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody';
-import '../../styling/Modal.css'
-
-
+import '../../styling/Modal.css';
 
 const ModalComponent = ({openModal, handleClose, specificLaunchData}: ModalProps): JSX.Element => {
   
@@ -60,7 +51,7 @@ const ModalComponent = ({openModal, handleClose, specificLaunchData}: ModalProps
               </TableRow>
               <TableRow>                  
                   <TableCell align="center">{specificLaunchData.launchDate}</TableCell>
-                  <TableCell align="center">{specificLaunchData.launchDate}</TableCell>
+                  <TableCell align="center">{specificLaunchData.rocketID}</TableCell>
                   <TableCell align="center">{specificLaunchData.launchpadID}</TableCell>
                   <TableCell align="center">{specificLaunchData.success.toString()}</TableCell>
                   <TableCell align="center">{specificLaunchData.details}</TableCell>

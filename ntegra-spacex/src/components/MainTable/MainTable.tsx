@@ -1,19 +1,11 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress,Box, TablePagination} from '@mui/material';
 import { getLaunchData } from '../../services/APICalls/ApiCalls';
 import {useState, useEffect} from 'react';
-import '../../styling/Table.css'
+import '../../styling/Table.css';
 import { FilteredLaunchData } from '../../services/APICalls/APICallTypes';
 import ModalComponent from './Modal';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import TablePagination from '@mui/material/TablePagination';
+
 
 const MainTable: React.FC = (): JSX.Element => {
 
@@ -30,13 +22,11 @@ const MainTable: React.FC = (): JSX.Element => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [specificLaunchData, setSpecificLaunchData] = useState<FilteredLaunchData>(initialLaunchData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [page, setPage] = useState<number>(0); 
 
-  
-  //If time, add local storage boolean to indicate whether API has been called. 
+  //Stored as a variable rather than in state as it's not being updated and remains constant. 
+  const rowsPerPage = 10
 
-  //the apiCallMade state is implemented to stop the spaceX API being called frequently. For the purposes of this app, the data just needs to be accessed once, stored in state, and that is it. The data from the spaceX api is not being updated frequently enough that it would require constant calls from this app, and making constant calls will impact performance of the app. Although basically neglible at this sclae, it would become noticeable if the app was scaled upwards. The API call is therefore made once, when the app is initially loaded and refreshed.
 
   const getDataFromAPICall = async (): Promise<void> => {
     try{
@@ -47,12 +37,13 @@ const MainTable: React.FC = (): JSX.Element => {
           setIsLoading(false)          
         }  
     }catch(error: any){
-        throw new Error(error)
+        setIsLoading(false);
+        throw new Error(error);
     }    
   }
 
   useEffect((): void => {
-    getDataFromAPICall()
+    getDataFromAPICall();
   }, [])
 
   const handleOpenModal = () :void => {
@@ -84,6 +75,7 @@ const MainTable: React.FC = (): JSX.Element => {
 
   return(<>
     <h1>Launch Data</h1>
+    <h3>To find a specific launch, please enter the name of the launch in the url. For instance, to find specific details on AsiaSat 8, use [domainname]/asiasat 8</h3>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -131,16 +123,11 @@ const MainTable: React.FC = (): JSX.Element => {
       </Table>
     </TableContainer>
     <TablePagination
-      rowsPerPageOptions={[5]} 
       component="div"
       count={responseData.length}
       page={page}
       onPageChange={(event, newPage) => setPage(newPage)}
-      rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={(event) => {
-        setRowsPerPage(parseInt(event.target.value, 5));
-        setPage(0);
-      }}
+      rowsPerPage={rowsPerPage}      
     />
     <ModalComponent
          openModal={openModal}

@@ -188,7 +188,7 @@ describe("Main Table component", () => {
       expect(modalColumnSuccess).toBeInTheDocument();
       expect(modalColumnLaunchpadID).toBeInTheDocument();
   
-      //
+      
     })
    
    

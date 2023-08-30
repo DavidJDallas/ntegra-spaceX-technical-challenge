@@ -16,7 +16,6 @@ const App: React.FC = (): JSX.Element => {
       <Container maxWidth ="lg"> 
       <Routes>
          <Route  path='/' element={<MainTable/>}>
-
          </Route>
           <Route path='/:launchName' element={<LaunchDetails/>}>            
         </Route>          
