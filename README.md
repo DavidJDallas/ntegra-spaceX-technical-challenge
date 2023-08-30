@@ -1,2 +1,2 @@
 # ntegra-spaceX-technical-challenge
-Technical challenge for Ntegra interview
+Please see the readme in the 'ntegra-spacex' file for the readme.
